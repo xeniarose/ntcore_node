@@ -1,0 +1,10 @@
+{
+    "name" : "ntcore_node",
+    "version" : "v0.1.0",
+    "scripts" : {
+        "preinstall" : "node-waf configure && node-waf build",
+        "preuninstall" : "rm -rf build/*"
+    },
+    "main" : "build/default/ntcore_node.node",
+    "description" : "NetworkTables bindings for node.js"
+}
