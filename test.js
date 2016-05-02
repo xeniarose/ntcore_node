@@ -1,6 +1,6 @@
 var ntcore = require('./build/Release/ntcore_node');
 
-var table, sendableChooser;
+var table, sendableChooser, command;
 
 try {
     ntcore.init(ntcore.SERVER);
@@ -16,6 +16,18 @@ try {
     });
     sendableChooser.put("options", ["sample text", "option 2", "option 5"]);
     sendableChooser.put("selected", "option 2");
+    
+    command = ntcore.getTable("sample_text/command");
+    command.put("running", false);
+    command.onChange("running", global.lis2 = function(k, v){
+        console.log("Command running: ", v);
+        if(v){
+            setTimeout(function(){
+                command.put("running", false);
+                console.log("Command ended");
+            }, 5000);
+        }
+    });
     
     ntcore.getTable("path/sub/table").put("val", 21);
     

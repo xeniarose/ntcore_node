@@ -12,6 +12,7 @@ using v8::Isolate;
 using v8::Local;
 using v8::Object;
 using v8::String;
+using v8::Boolean;
 using v8::Number;
 using v8::Array;
 using v8::Value;
@@ -129,6 +130,15 @@ void GetAll(const FunctionCallbackInfo<Value>& args){
     
     args.GetReturnValue().Set(v8Arr);
 }
+    
+void IsConnected(const FunctionCallbackInfo<Value>& args){
+    Isolate* isolate = args.GetIsolate();
+    Local<Context> ctx = isolate->GetCurrentContext();
+    
+    bool isConnected = nt::GetConnections().size() > 0;
+    
+    args.GetReturnValue().Set(Boolean::New(isolate, isConnected));
+}
 
 static void Shutdown(void*) {
     Debug("ntcore_node: shutdown");
@@ -168,6 +178,8 @@ void InitAll(Local<Object> exports, Local<Object> module) {
     NODE_SET_METHOD(exports, "getTable", CreateTable);
     NODE_SET_METHOD(exports, "setOptions", SetOptions);
     NODE_SET_METHOD(exports, "getAllEntries", GetAll);
+    NODE_SET_METHOD(exports, "isConnected", IsConnected);
+
     exports->Set(ctx, String::NewFromUtf8(isolate, "CLIENT"), Number::New(isolate, NTN_MODE_CLIENT));
     exports->Set(ctx, String::NewFromUtf8(isolate, "SERVER"), Number::New(isolate, NTN_MODE_SERVER));
     exports->Set(ctx, String::NewFromUtf8(isolate, "DEFAULT_PORT"), Number::New(isolate, NT_DEFAULT_PORT));

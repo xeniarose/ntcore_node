@@ -32,6 +32,6 @@ try {
 
 (function wait () {
     //table.put("c", Math.random());
-    console.log(ntcore.getAllEntries());
+    console.log(ntcore.isConnected());
     setTimeout(wait, 1000);
 })();
