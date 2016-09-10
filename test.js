@@ -32,6 +32,8 @@ try {
     ntcore.getTable("path/sub/table").put("val", 21);
     
     ntcore.getTable("").put("hi", 42);
+    ntcore.getTable("").put("suuuuuuuuuuuuuuuuuuuuuuuuuuuuperlong", 42);
+    ntcore.getTable("path/sub").put("suuuuuuuuuuuuuuuuuuuuuuuuuuuuperlong", 42);
     
     console.log(ntcore.getAllEntries());
 } catch(e) {
@@ -51,4 +53,10 @@ try {
     table.put("array-boolean", [Math.random()>0.5, Math.random()>0.5, Math.random()>0.5]);
     table.put("array-string", [Math.random()+"sssssss", Math.random()+"sssssssss", Math.random()+"ssssss"]);
     table.put("array-misc", [Math.random()+"", Math.random(), Math.random()]);
+})();
+
+(function wait2() {
+    setTimeout(wait2, 20);
+    
+    table.put("graph-spam-test", Math.random());
 })();

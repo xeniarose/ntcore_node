@@ -60,3 +60,18 @@ Adds a change listener for the specified `key`.
 
 - Will not exit cleanly on SIGINT because the exit handler is never called
 - No support for raw NetworkTable values
+
+## Building ##
+
+For node.js:
+
+- [Install node-gyp + dependencies](https://github.com/nodejs/node-gyp#installation)
+- `node-gyp configure build --python "path to your python 2.7"`
+- Find the `ntcore_node.node` file
+
+For nw.js:
+
+- [Install nw-gyp + dependencies](https://github.com/nwjs/nw-gyp#installation)
+- Getting nw-gyp to work with VS 2015 on Windows required some black magic that I can't remember how to do right now. On Linux and OSX I don't expect issues.
+- `nw-gyp configure build --target=<target nw.js version> --python "path to your python 2.7"`. For Windows, add `--msvs_version=2015`.
+- Find the `ntcore_node.node` file
